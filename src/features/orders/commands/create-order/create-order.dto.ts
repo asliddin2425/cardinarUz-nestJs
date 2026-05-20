@@ -1,18 +1,19 @@
 import { IsNumber, IsBoolean, IsEnum, IsOptional, IsEmail, IsString, MaxLength, Matches, IsArray, ArrayMinSize } from 'class-validator';
 import { PaymentMethod } from '../../../../shared/enums';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class OrderItemDto {
-  @IsNumber() productId: number;
-  @IsNumber() articulId: number;
-  @IsNumber() quantity: number;
+  @IsNumber() @ApiProperty() productId: number;
+  @IsNumber() @ApiProperty() articulId: number;
+  @IsNumber() @ApiProperty() quantity: number;
 }
 
 export class CreateOrderDto {
-  @IsNumber() branchId: number;
-  @IsString() @MaxLength(64) fullName: string;
-  @Matches(/^\+998\d{9}$/) phoneNumber: string;
-  @IsOptional() @IsEmail() email?: string;
-  @IsBoolean() delivery: boolean;
-  @IsEnum(PaymentMethod) paymentMethod: PaymentMethod;
-  @IsArray() @ArrayMinSize(1) items: OrderItemDto[];
+  @IsNumber() @ApiProperty() branchId: number;
+  @IsString() @MaxLength(64) @ApiProperty() fullName: string;
+  @Matches(/^\+998\d{9}$/) @ApiProperty() phoneNumber: string;
+  @IsOptional() @IsEmail() @ApiProperty() email?: string;
+  @IsBoolean() @ApiProperty() delivery: boolean;
+  @IsEnum(PaymentMethod) @ApiProperty() paymentMethod: PaymentMethod;
+  @IsArray() @ArrayMinSize(1) @ApiProperty() items: OrderItemDto[];
 }
